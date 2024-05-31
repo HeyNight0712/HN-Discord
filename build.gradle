@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 group = 'hn.blacknight0712'
@@ -7,13 +8,43 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'hn.blacknight0712.HN' // 指定主类
+        )
+    }
 }
 
 dependencies {
+    // 測試單元
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+
+    // Logger
+    implementation("org.slf4j:slf4j-api:2.0.13") // SLF4J
+    implementation('ch.qos.logback:logback-classic:1.4.12') // LOGBACK
+
+    implementation("net.dv8tion:JDA:5.0.0-beta.23") // Discord JDA
+    implementation("org.yaml:snakeyaml:2.2") // Yaml
 }
 
 test {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec).configureEach {
+    environment "JAVA_TOOL_OPTIONS", "-Dfile.encoding=UTF-8"
+}
+
+shadowJar {
+    archiveClassifier.set('')
 }
