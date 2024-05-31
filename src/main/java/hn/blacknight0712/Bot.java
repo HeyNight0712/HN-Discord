@@ -1,7 +1,8 @@
 package hn.blacknight0712;
 
-import hn.blacknight0712.utils.ConfigManager;
+import hn.blacknight0712.utils.file.ConfigManager;
 import hn.blacknight0712.utils.LoggerManager;
+import hn.blacknight0712.utils.file.FileConfiguration;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -13,11 +14,10 @@ public class Bot {
     private static JDA jda;
 
     public static void startBot() {
-        Map<String, Object> config = ConfigManager.getConfig("config");
-        Map<String, Object> discordConfig = (Map<String, Object>) config.get("Discord");
+        FileConfiguration config = ConfigManager.getConfig("config");
         try {
-            jda = JDABuilder.createDefault((String) discordConfig.get("Token"))
-                    .setActivity(Activity.playing((String) discordConfig.get("Activity")))
+            jda = JDABuilder.createDefault((String) config.get("Discord.Token"))
+                    .setActivity(Activity.playing((String) config.get("Discord.Activity")))
                     .build();
         } catch (InvalidTokenException e) {
             LoggerManager.error("Token 錯誤");
