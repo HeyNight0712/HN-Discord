@@ -20,8 +20,6 @@ public class Config {
         discord.put("Activity", "JDA");
         config.addDefault("Discord", discord);
 
-
-
         ConfigManager.saveConfig("config");
         ConfigManager.loadConfig("config");
 
