@@ -1,20 +1,31 @@
 package hn.blacknight0712;
 
+import hn.blacknight0712.core.music.Music;
 import hn.blacknight0712.data.Config;
 import hn.blacknight0712.plugins.PluginManager;
 import hn.blacknight0712.utils.LoggerManager;
 
 public class HN {
+
     public static void main(String[] args) {
         LoggerManager.info("啟動中...");
 
+        // load Config
         Config.instanceConfig();
-        LoggerManager.info("Config 加載完畢");
 
+        // load Bot
+        Bot.startBot();
+
+        // load Plugin
+        initPlugin();
+
+    }
+
+    public static void initPlugin() {
         PluginManager pluginManager = new PluginManager();
-        pluginManager.loadPlugin();
-        pluginManager.onEnableAll();
+        // pluginManager.loadPlugin();
+        pluginManager.addPlugins(new Music());
 
-        // Bot.startBot();
+        pluginManager.onEnableAll();
     }
 }

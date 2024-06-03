@@ -1,5 +1,6 @@
 package hn.blacknight0712.data;
 
+import hn.blacknight0712.utils.LoggerManager;
 import hn.blacknight0712.utils.file.ConfigManager;
 import hn.blacknight0712.utils.file.FileConfiguration;
 
@@ -23,5 +24,7 @@ public class Config {
 
         ConfigManager.saveConfig("config");
         ConfigManager.loadConfig("config");
+
+        LoggerManager.info("Config 加載完畢");
     }
 }
