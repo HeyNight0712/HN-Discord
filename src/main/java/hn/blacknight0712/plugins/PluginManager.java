@@ -4,9 +4,13 @@ package hn.blacknight0712.plugins;
 import hn.blacknight0712.utils.LoggerManager;
 import org.slf4j.Logger;
 
+import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.ServiceLoader;
 
 public class PluginManager {
     private List<Plugin> plugins = new ArrayList<>();
@@ -17,25 +21,44 @@ public class PluginManager {
         logger = LoggerManager.getLogger("PluginManager");
     }
 
-    public void loadPlugin(String className) {
-        try {
-            Class<?> clazz = Class.forName(className);
-            Plugin plugin = (Plugin) clazz.getDeclaredConstructor(Logger.class).newInstance(logger);
-            plugins.add(plugin);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void loadPlugin() {
+        File pluginDir = new File("plugin");
+        // 檢查是否存在 plugin 資料夾
+        if (!pluginDir.exists()) {
+            if (!pluginDir.mkdirs()) {
+                LoggerManager.error("Plugin 資料夾創建失敗!");
+                return;
+            }
+        }
+
+        File[] jarFiles = pluginDir.listFiles(((dir, name) -> name.endsWith(".jar")));
+        if (jarFiles != null) {
+            for (File jarFile: jarFiles) {
+                try {
+                    URL jarURL = jarFile.toURI().toURL();
+                    URLClassLoader classLoader = new URLClassLoader(new URL[]{jarURL}, this.getClass().getClassLoader());
+                    ServiceLoader<Plugin> serviceLoader = ServiceLoader.load(Plugin.class, classLoader);
+                    for (Plugin plugin: serviceLoader) {
+                        plugins.add(plugin);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     public void onEnableAll() {
         for (Plugin plugin: plugins) {
             plugin.onEnable();
+            LoggerManager.info(plugin.getName() + " Enable!");
         }
     }
 
     public void onDisableAll() {
         for (Plugin plugin: plugins) {
             plugin.onDisable();
+            LoggerManager.info(plugin.getName() + " Disable!");
         }
     }
 
