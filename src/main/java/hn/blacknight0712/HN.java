@@ -1,5 +1,6 @@
 package hn.blacknight0712;
 
+import hn.blacknight0712.core.member.Member;
 import hn.blacknight0712.core.music.Music;
 import hn.blacknight0712.data.Config;
 import hn.blacknight0712.plugins.PluginManager;
@@ -14,7 +15,7 @@ public class HN {
         Config.instanceConfig();
 
         // load Bot
-        Bot.startBot();
+        // Bot.startBot();
 
         // load Plugin
         initPlugin();
@@ -25,6 +26,7 @@ public class HN {
         PluginManager pluginManager = new PluginManager();
         // pluginManager.loadPlugin();
         pluginManager.addPlugins(new Music());
+        pluginManager.addPlugins(new Member());
 
         pluginManager.onEnableAll();
     }

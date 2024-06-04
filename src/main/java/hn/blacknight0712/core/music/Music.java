@@ -10,11 +10,12 @@ public class Music extends Plugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("測試中");
+        getLogger().info("測試中 暫未開放");
+        onDisable();
     }
 
     @Override
     public void onDisable() {
-
+        getLogger().info("關閉...");
     }
 }

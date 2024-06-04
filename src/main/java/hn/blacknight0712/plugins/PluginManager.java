@@ -12,23 +12,32 @@ import java.util.List;
 import java.util.ServiceLoader;
 
 public class PluginManager {
-    private List<Plugin> plugins = new ArrayList<>();
-    private Logger logger;
+    private static Logger logger = LoggerManager.getLogger("PluginManager");
+    private static final File pluginDir = new File("plugin");
+    private final List<Plugin> plugins = new ArrayList<>();
 
 
     public PluginManager() {
         logger = LoggerManager.getLogger("PluginManager");
     }
 
-    public void loadPlugin() {
-        File pluginDir = new File("plugin");
-        // 檢查是否存在 plugin 資料夾
+    public static boolean createPluginFolder() {
         if (!pluginDir.exists()) {
             if (!pluginDir.mkdirs()) {
                 logger.error("Plugin 資料夾創建失敗!");
-                return;
+                return false;
             }
         }
+        return true;
+    }
+
+    public static File getPluginDir() {
+        return pluginDir;
+    }
+
+    public void loadPlugin() {
+        // 檢查是否存在 plugin 資料夾
+        if (!createPluginFolder()) return;
 
         File[] jarFiles = pluginDir.listFiles(((dir, name) -> name.endsWith(".jar")));
         if (jarFiles != null) {

@@ -16,10 +16,6 @@ public class ConfigManager {
         return configs.get(file);
     }
 
-    public static void reload() {
-
-    }
-
     public static void loadConfig(String file) {
         FileConfiguration config = configs.getOrDefault(file, new FileConfiguration(file));
         config.loadConfig();
