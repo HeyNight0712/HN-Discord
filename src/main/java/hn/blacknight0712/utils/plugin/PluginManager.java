@@ -1,4 +1,4 @@
-package hn.blacknight0712.plugins;
+package hn.blacknight0712.utils.plugin;
 
 
 import hn.blacknight0712.utils.LoggerManager;
@@ -14,7 +14,7 @@ import java.util.ServiceLoader;
 public class PluginManager {
     private static Logger logger = LoggerManager.getLogger("PluginManager");
     private static final File pluginDir = new File("plugin");
-    private final List<Plugin> plugins = new ArrayList<>();
+    private static final List<Plugin> plugins = new ArrayList<>();
 
 
     public PluginManager() {
@@ -79,8 +79,16 @@ public class PluginManager {
         }
     }
 
-    public List<Plugin> getPlugins() {
+    public static List<Plugin> getPlugins() {
         return plugins;
+    }
+
+    public static List<String> getPluginNames() {
+        List<String> pluginNames = new ArrayList<>();
+        for (Plugin plugin: plugins) {
+            pluginNames.add(plugin.getName());
+        }
+        return pluginNames;
     }
 
     public void addPlugins(Plugin plugin) {

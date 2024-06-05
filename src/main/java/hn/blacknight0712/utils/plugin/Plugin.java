@@ -1,4 +1,4 @@
-package hn.blacknight0712.plugins;
+package hn.blacknight0712.utils.plugin;
 
 import hn.blacknight0712.core.member.Member;
 import hn.blacknight0712.utils.LoggerManager;

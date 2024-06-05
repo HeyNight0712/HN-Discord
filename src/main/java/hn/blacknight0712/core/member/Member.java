@@ -1,7 +1,7 @@
 package hn.blacknight0712.core.member;
 
 import hn.blacknight0712.core.member.data.Config;
-import hn.blacknight0712.plugins.Plugin;
+import hn.blacknight0712.utils.plugin.Plugin;
 
 public class Member extends Plugin {
     private static Plugin plugin;

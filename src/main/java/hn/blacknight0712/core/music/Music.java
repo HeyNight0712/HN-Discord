@@ -1,6 +1,6 @@
 package hn.blacknight0712.core.music;
 
-import hn.blacknight0712.plugins.Plugin;
+import hn.blacknight0712.utils.plugin.Plugin;
 
 public class Music extends Plugin {
     @Override
