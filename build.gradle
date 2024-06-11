@@ -31,9 +31,6 @@ dependencies {
 
     implementation("net.dv8tion:JDA:5.0.0-beta.23") // Discord JDA
     implementation("org.yaml:snakeyaml:2.2") // Yaml
-
-    // Plugin
-    implementation 'dev.arbjerg:lavaplayer:2.1.2' // Music - LavaPlayer
 }
 
 test {
