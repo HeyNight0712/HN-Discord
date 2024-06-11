@@ -1,7 +1,6 @@
-package hn.blacknight0712.core.member.data;
+package plugin.member.data;
 
-import hn.blacknight0712.core.member.Member;
-import hn.blacknight0712.utils.LoggerManager;
+import plugin.member.Member;
 import hn.blacknight0712.utils.file.FileConfiguration;
 
 import java.util.HashMap;
@@ -20,22 +19,22 @@ public class Config {
     }
 
     public static void instanceConfig() {
-        Member.getPlugin().loadConfig("config");
-        FileConfiguration config = Member.getPlugin().getConfig("config");
+        String configName = "config";
+        Member.getPlugin().loadConfig(configName);
+        FileConfiguration config = Member.getPlugin().getConfig(configName);
 
         // 加入 公會事件
         Map<String, Object> joinGuildEvent = new HashMap<>();
         joinGuildEvent.put("Enable", true);
         joinGuildEvent.put("Channel", "00000000");
-        config.addDefault("JoinGuildEvent", joinGuildEvent);
+        config.addDefault("GuildMemberJoin", joinGuildEvent);
 
         // 離開 公會事件
         Map<String, Object> leavingGuildEvent = new HashMap<>();
         leavingGuildEvent.put("Enable", true);
         leavingGuildEvent.put("Channel", "00000000");
-        config.addDefault("LeavingGuildEvent", leavingGuildEvent);
+        config.addDefault("GuildMemberRemove", leavingGuildEvent);
 
-        Member.getPlugin().saveConfig("config");
-        LoggerManager.info("Config 加載完畢");
+        Member.getPlugin().saveConfig(configName);
     }
 }

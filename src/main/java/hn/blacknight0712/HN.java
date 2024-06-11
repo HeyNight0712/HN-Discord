@@ -1,8 +1,6 @@
 package hn.blacknight0712;
 
-import hn.blacknight0712.commands.PluginCommand;
-import hn.blacknight0712.core.member.Member;
-import hn.blacknight0712.core.music.Music;
+import plugin.member.Member;
 import hn.blacknight0712.data.Config;
 import hn.blacknight0712.utils.command.CommandManager;
 import hn.blacknight0712.utils.plugin.PluginManager;
@@ -17,17 +15,17 @@ public class HN {
         Config.instanceConfig();
 
         // load Bot
-         Bot.startBot();
+        if (!Bot.startBot()) return;
 
         // load Plugin
         initPlugin();
         initCommand();
+        LoggerManager.info("啟動完畢...");
     }
 
     public static void initPlugin() {
         PluginManager pluginManager = new PluginManager();
         // pluginManager.loadPlugin();
-        pluginManager.addPlugins(new Music());
         pluginManager.addPlugins(new Member());
 
         pluginManager.onEnableAll();
@@ -36,7 +34,7 @@ public class HN {
     public static void initCommand() {
         CommandManager commandManager = new CommandManager();
 
-        CommandManager.addCommand(new PluginCommand());
+        // CommandManager.addCommand(new PluginCommand());
 
         Bot.getJda().addEventListener(commandManager);
     }

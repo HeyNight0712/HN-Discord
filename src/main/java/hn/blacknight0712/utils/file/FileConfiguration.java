@@ -58,6 +58,57 @@ public class FileConfiguration{
         }
     }
 
+    // 获取 String 类型的值
+    public String getString(@NotNull String key) {
+        Object value = get(key);
+        return value != null ? value.toString() : null;
+    }
+
+    // 获取 Integer 类型的值
+    public Integer getInt(@NotNull String key) {
+        Object value = get(key);
+        if (value instanceof Number) {
+            return ((Number) value).intValue();
+        }
+        return null;
+    }
+
+    // 获取 Boolean 类型的值
+    public Boolean getBoolean(@NotNull String key) {
+        Object value = get(key);
+        if (value instanceof Boolean) {
+            return (Boolean) value;
+        }
+        return null;
+    }
+
+    // 获取 Double 类型的值
+    public Double getDouble(@NotNull String key) {
+        Object value = get(key);
+        if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        }
+        return null;
+    }
+
+    // 获取 Long 类型的值
+    public Long getLong(@NotNull String key) {
+        Object value = get(key);
+        if (value instanceof Number) {
+            return ((Number) value).longValue();
+        }
+        return null;
+    }
+
+    // 获取 Float 类型的值
+    public Float getFloat(@NotNull String key) {
+        Object value = get(key);
+        if (value instanceof Number) {
+            return ((Number) value).floatValue();
+        }
+        return null;
+    }
+
     public Object get(@NotNull String key) {
         String[] keys = key.split("\\.");
         Map<String, Object> currentMap = configMap;

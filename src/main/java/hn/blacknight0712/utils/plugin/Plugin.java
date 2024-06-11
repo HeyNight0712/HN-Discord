@@ -1,6 +1,8 @@
 package hn.blacknight0712.utils.plugin;
 
-import hn.blacknight0712.core.member.Member;
+import hn.blacknight0712.Bot;
+import net.dv8tion.jda.api.JDA;
+import plugin.member.Member;
 import hn.blacknight0712.utils.LoggerManager;
 import hn.blacknight0712.utils.file.ConfigManager;
 import hn.blacknight0712.utils.file.FileConfiguration;
@@ -36,5 +38,10 @@ public abstract class Plugin {
 
     public void saveConfig(String file) {
         ConfigManager.saveConfig(getPluginFolder() + "/" + file);
+    }
+
+    // 獲取 jda
+    public JDA getJda() {
+        return Bot.getJda();
     }
 }
