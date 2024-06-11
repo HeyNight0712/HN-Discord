@@ -35,32 +35,22 @@ public class PluginManager {
         return pluginDir;
     }
 
-    public void loadPlugin() {
+    public void loadPlugins() {
         // 檢查是否存在 plugin 資料夾
         if (!createPluginFolder()) return;
 
         File[] jarFiles = pluginDir.listFiles(((dir, name) -> name.endsWith(".jar")));
-        if (jarFiles != null) {
-            for (File jarFile: jarFiles) {
-                try {
-                    URL jarURL = jarFile.toURI().toURL();
-                    URLClassLoader classLoader = new URLClassLoader(new URL[]{jarURL}, this.getClass().getClassLoader());
+        if (jarFiles == null) return;
 
-                    // Debug
-                    logger.info("ClassLoader URLs: ");
-                    for (URL url: classLoader.getURLs()) {
-                        logger.info(url.toString());
-                    }
-
-                    ServiceLoader<Plugin> serviceLoader = ServiceLoader.load(Plugin.class, classLoader);
-                    for (Plugin plugin: serviceLoader) {
-                        plugins.add(plugin);
-                        plugin.onEnable();
-                        logger.info("加載測試 " + plugin.getName());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        for (File jarFile : jarFiles) {
+            try {
+                ServiceLoader<Plugin> serviceLoader = ServiceLoader.load(Plugin.class, new URLClassLoader(new URL[]{jarFile.toURI().toURL()}));
+                for (Plugin plugin : serviceLoader) {
+                    plugins.add(plugin);
+                    logger.info("偵測到 " + plugin.getName() + " 插件");
                 }
+            } catch (Exception e) {
+                return;
             }
         }
     }
