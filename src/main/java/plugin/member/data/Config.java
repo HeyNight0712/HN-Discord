@@ -35,6 +35,12 @@ public class Config {
         leavingGuildEvent.put("Channel", "00000000");
         config.addDefault("GuildMemberRemove", leavingGuildEvent);
 
+        // 水蜜桃集裝箱 事件
+        Map<String, Object> peachContainerEvent = new HashMap<>();
+        peachContainerEvent.put("Enable", true);
+        peachContainerEvent.put("Channel", "00000000");
+        config.addDefault("PeachContainer", peachContainerEvent);
+
         Member.getPlugin().saveConfig(configName);
     }
 }

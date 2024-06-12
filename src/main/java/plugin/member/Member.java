@@ -5,6 +5,7 @@ import plugin.member.data.Config;
 import hn.blacknight0712.utils.plugin.Plugin;
 import plugin.member.listeners.GuildMemberJoinListener;
 import plugin.member.listeners.GuildMemberRemoveListener;
+import plugin.member.listeners.PeachContainerListener;
 
 public class Member extends Plugin {
     private static Plugin plugin;
@@ -24,6 +25,10 @@ public class Member extends Plugin {
 
         if (config.getBoolean("GuildMemberRemove.Enable")) {
             getJda().addEventListener(new GuildMemberRemoveListener(config.getString("GuildMemberRemove.Channel")));
+        }
+
+        if (config.getBoolean("PeachContainer.Enable")) {
+            getJda().addEventListener(new PeachContainerListener(config.getString("PeachContainer.Channel")));
         }
 
         getLogger().info(getName() + " 啟動完畢");
