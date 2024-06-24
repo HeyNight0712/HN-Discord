@@ -1,8 +1,9 @@
 package hn.blacknight0712;
 
+import hn.blacknight0712.utils.command.SlashCommandManager;
+import plugin.avalon.Avalon;
 import plugin.member.Member;
 import hn.blacknight0712.data.Config;
-import hn.blacknight0712.utils.command.CommandManager;
 import hn.blacknight0712.utils.plugin.PluginManager;
 import hn.blacknight0712.utils.LoggerManager;
 
@@ -19,7 +20,9 @@ public class HN {
 
         // load Plugin
         initPlugin();
-        initCommand();
+        Bot.getJda().addEventListener(new SlashCommandManager());
+
+
         LoggerManager.info("啟動完畢...");
     }
 
@@ -27,15 +30,8 @@ public class HN {
         PluginManager pluginManager = new PluginManager();
         // pluginManager.loadPlugin();
         pluginManager.addPlugins(new Member());
+        pluginManager.addPlugins(new Avalon());
 
         pluginManager.onEnableAll();
-    }
-
-    public static void initCommand() {
-        CommandManager commandManager = new CommandManager();
-
-        // CommandManager.addCommand(new PluginCommand());
-
-        Bot.getJda().addEventListener(commandManager);
     }
 }
