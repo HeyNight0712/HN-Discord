@@ -3,13 +3,15 @@ package plugin.avalon.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import org.jetbrains.annotations.NotNull;
-import plugin.avalon.data.embeds.info.role.*;
+import plugin.avalon.interfaces.embeds.InfoMenu;
+import plugin.avalon.interfaces.embeds.role.*;
+import plugin.avalon.interfaces.sekects.SelectInfo;
 
 public class Info {
     public static void reply(SlashCommandInteractionEvent event) {
         event
-                .replyEmbeds(new plugin.avalon.data.embeds.info.Info().getEmbed().build())
-                .addActionRow(new plugin.avalon.data.select.Info().getMenu())
+                .replyEmbeds(new InfoMenu().getEmbed().build())
+                .addActionRow(new SelectInfo().getMenu())
                 .setEphemeral(true)
                 .queue();
     }
@@ -44,7 +46,7 @@ public class Info {
                 event.editMessageEmbeds(new Percival().getEmbed().build()).queue();
                 return;
             case "Menu":
-                event.editMessageEmbeds(new plugin.avalon.data.embeds.info.Info().getEmbed().build()).queue();
+                event.editMessageEmbeds(new InfoMenu().getEmbed().build()).queue();
                 return;
         }
 

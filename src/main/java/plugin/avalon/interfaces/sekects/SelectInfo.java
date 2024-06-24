@@ -1,8 +1,8 @@
-package plugin.avalon.data.select;
+package plugin.avalon.interfaces.sekects;
 
 import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 
-public class Info {
+public class SelectInfo {
 
     public StringSelectMenu getMenu() {
         return StringSelectMenu.create("Info:Role")

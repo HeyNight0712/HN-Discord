@@ -1,16 +1,16 @@
-package plugin.avalon.data.embeds.info.role;
+package plugin.avalon.interfaces.embeds.role;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
 
-public class LoyalServantOfArthur {
+public class Morgana {
     public EmbedBuilder getEmbed() {
         EmbedBuilder embed = new EmbedBuilder();
-        embed.setTitle("亞瑟的忠臣");
+        embed.setTitle("莫甘娜");
         embed.setDescription(
                 """
-                                沒有能力的正義方角色
+                                在遊戲開始時的辨識身份階段，可以假扮成【梅林】，混淆【派西維爾】
                         """);
 
         embed.setColor(Color.decode("#237feb"));

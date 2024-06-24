@@ -1,10 +1,10 @@
-package plugin.avalon.data.embeds.info;
+package plugin.avalon.interfaces.embeds;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
 
-public class Info {
+public class InfoMenu {
     public EmbedBuilder getEmbed() {
         EmbedBuilder embed = new EmbedBuilder();
         embed.setTitle("遊戲資訊");

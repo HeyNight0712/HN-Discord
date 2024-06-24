@@ -1,4 +1,4 @@
-package plugin.avalon.data.embeds.info.role;
+package plugin.avalon.interfaces.embeds.role;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 
